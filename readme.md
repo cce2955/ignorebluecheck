@@ -2,6 +2,14 @@
 
 Hi! This is a google extesion that blocks all blue checks from Twitter. It's still a work in progress so it doesn't block everything but it should block out 90% of things. You can manually block on your account or use one of the already available blue blockers, but this is intended for people who browse without their account or aren't logged in yet.
 
+# Before Extension
+![before extension](https://user-images.githubusercontent.com/44739551/234305434-2418e7c2-6387-4791-964f-2302d794391e.png)
+
+# After Extension 
+![after extension](https://user-images.githubusercontent.com/44739551/234305447-ff161d63-1756-4c0d-81bc-85bdfe46a39b.png)
+
+# Installation
+Download a zip archive of this page, Go to your extensions, in the top right, toggle "developer mode", click "load unpacked", and after unzipping this archive, select this folder, activate the extension in your settings if needed but after that it should run on its own. There may be a small delay on videos as technically they are still loading in your cache but I whipped this up in like 2 hours so whatever, Enjoy your peace.
 
 # What's blocked
 

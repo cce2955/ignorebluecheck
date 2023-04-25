@@ -10,9 +10,11 @@ function blockVerifiedTweets() {
   
         // Hide the tweet user avatar element
         const tweetUserAvatarElement = tweetTextElement.closest('[data-testid="tweet"]').querySelector('[data-testid="Tweet-User-Avatar"]');
-        if (tweetUserAvatarElement) {
+        if (tweetUserAvatarElement !== null) {
           tweetUserAvatarElement.style.display = 'none';
         }
+        
+
   
         // Hide any images posted by the same user
         const tweetImageElements = tweetTextElement.closest('[data-testid="tweet"]').querySelectorAll('img[src^="https://pbs.twimg.com/media/"][alt="Image"][draggable="true"]');
@@ -40,7 +42,7 @@ function blockVerifiedTweets() {
       resizeVideoComponent();
       
       // Call the function every 5 seconds
-      setInterval(resizeVideoComponent, 1000);
+      setInterval(resizeVideoComponent, 500);
       
   }
   
@@ -48,5 +50,6 @@ function blockVerifiedTweets() {
   blockVerifiedTweets();
   
   // Call the function every 5 seconds
-  setInterval(blockVerifiedTweets, 1000);
+  setInterval(blockVerifiedTweets, 500);
   
+  let isEnabled = false;
