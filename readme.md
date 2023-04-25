@@ -1,6 +1,6 @@
 # Ignore blue checks
 
-Hi! This is a google extesion that blocks all blue checks from Twitter. It's still a work in progress so it doesn't block everything but it should block out 90% of things. You can manually block on your account or use one of the already available blue blockers, but this is intended for people who browse without their account or aren't logged in yet.
+Hi! This is a google extension that blocks all blue checks from Twitter. It's still a work in progress so it doesn't block everything but it should block out 90% of things. You can manually block on your account or use one of the already available blue blockers, but this is intended for people who browse without their account or aren't logged in yet.
 
 # Before Extension
 ![before extension](https://user-images.githubusercontent.com/44739551/234305434-2418e7c2-6387-4791-964f-2302d794391e.png)
