@@ -9,7 +9,7 @@ Hi! This is a google extesion that blocks all blue checks from Twitter. It's sti
 ![after extension](https://user-images.githubusercontent.com/44739551/234305447-ff161d63-1756-4c0d-81bc-85bdfe46a39b.png)
 
 # Installation
-Download a zip archive of this page, Go to your extensions, in the top right, toggle "developer mode", click "load unpacked", and after unzipping this archive, select this folder, activate the extension in your settings if needed but after that it should run on its own. Enjoy your peace.
+Download a zip archive of this page, Go to your extensions, in the top right, toggle "developer mode", click "load unpacked", and after unzipping this archive, select this folder, activate the extension in your settings if needed but after that it should run on its own. There may be a small delay on videos as technically they are still loading in your cache but I whipped this up in like 2 hours so whatever, Enjoy your peace.
 
 # What's blocked
 
