@@ -13,7 +13,7 @@ Download a zip archive of this page, Go to your extensions, in the top right, to
 
 # What's blocked
 
-If demand is high I'll change it, but right now you can only see "who" you are ignoring, but all text, videos, and pictures from a user with a blue checkmark should be unable to load.
+If demand is high I'll change it, but right now you can only see "who" you are ignoring, but all text, videos, and pictures from a user with a blue checkmark should be unable to load. As a bonus it seems to block some ads too, wasn't even my intent but I'll take it.
 
 # Why?
 Normally I wouldn't care and one point I did find the subscriber drama humorous but after a while certain blue checkmarks that I know I have blocked seemed to creep back into my view and I'm just tired of it, and I'm certain people are even more annoyed by them. So here's the tool
