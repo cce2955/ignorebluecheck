@@ -32,7 +32,7 @@ Hi! This is a google extension that blocks all blue checks from Twitter. It's st
 ## Why?
 * Normally I wouldn't care and one point I did find the subscriber drama humorous but after a while certain blue checkmarks that I know I have blocked seemed to creep back into my view and I'm just tired of it, and I'm certain people are even more annoyed by them. So here's the tool
 
-##todo
+## todo
 add a button to disable functionality if needed, user has to manually disable via extensions, which technically is the point but still...
 some ads are coming through, add a function to block ads
 the functionality to block banners and user descriptions is not working properly, but to be fair if you're going to their page you may be interested in seeing those things, considering if this is worth the effort
