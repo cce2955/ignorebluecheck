@@ -1,113 +1,155 @@
 const checkmarkSelector = 'svg[data-testid="icon-verified"]';
-const whitelist = []; // Add user handles to the whitelist
-
-const getWhitelist = () => {
-  return JSON.parse(localStorage.getItem('whitelist')) || [];
-};
-
-const isUserWhitelisted = (container) => {
-  const userHandleElement = container.querySelector('div[dir="ltr"] > span');
-  if (userHandleElement) {
-    const userHandleText = userHandleElement.textContent;
-    //console.log(userHandleText); 
-    return getWhitelist().includes(userHandleText);
+let whitelist = []; // Add user handles to the whitelist
+if (chrome.storage) {
+  // Fetch the whitelist from storage and store it in memory
+  chrome.storage.local.get('whitelist', (storageData) => {
+    console.log(storageData);
+    whitelist = storageData.whitelist || [];
+  });
+} else {
+  console.error('chrome.storage is not available');
+}
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  console.log(whitelist);
+  console.log("addlistenter")
+  if (request.type === 'request_data') {
+    // get the data you want to send to the popup
+    const data = whitelist
+    sendResponse({ data });
+    console.log("sending")
+  } else if (request.type === 'update_whitelist') {
+    // Update the whitelist in memory
+    whitelist = request.whitelist;
+    console.log(whitelist);
+    console.log("after update")
+    // Perform the required action with the updated whitelist and send a response, if needed
+    sendResponse({ success: true });
   }
-  return false;
-};
+});
 
-const removeBackgroundImage = (container) => {
-  const imageDiv = container.querySelector('div[data-testid="tweetPhoto"]');
-  if (imageDiv) {
-    imageDiv.replaceChildren();
+
+const removeBackgroundImage = (container, username) => {
+  console.log('Checking whitelist for', username);
+  if (!isUserWhitelisted(username)) {
+    console.log(username + "is in the whitelist, allowing")
+    const imageDiv = container.querySelector('div[data-testid="tweetPhoto"]');
+    if (imageDiv) {
+      imageDiv.replaceChildren();
+    }
   }
 };
 
-const removeUserAvatar = (container) => {
+const removeUserAvatar = (container, username) => {
+  if (!isUserWhitelisted(username)) {
   const userAvatarDivs = container.querySelectorAll('div[data-testid="Tweet-User-Avatar"]');
   userAvatarDivs.forEach((avatarDiv) => {
     avatarDiv.replaceChildren();
   });
+}
 };
 
-const removeUserDescription = (container) => {
+const removeUserDescription = (container, username) => {
+  if (!isUserWhitelisted(username)) {
   const userDescriptionDivs = container.querySelectorAll('div[data-testid="UserDescription"]');
   userDescriptionDivs.forEach((descriptionDiv) => {
-    // Perform additional operations on the descriptionDiv here
     descriptionDiv.replaceChildren();
   });
+}
 };
 
-const removeUserAvatarContainer = (container) => {
-  const userAvatarContainerDivs = container.querySelectorAll('div[data-testid^="UserAvatar-Container-"]');
+const removeUserAvatarContainer = (container, username) => {
+  if (!isUserWhitelisted(username)) {
+    const userAvatarContainerDivs = container.querySelectorAll('div[data-testid^="UserAvatar-Container-"]');
   userAvatarContainerDivs.forEach((avatarContainerDiv) => {
     avatarContainerDiv.replaceChildren();
   });
+}
 };
 
-const removeTweetText = (container) => {
-  const tweetTextElements = container.querySelectorAll('[data-testid="tweetText"]');
+const removeTweetText = (container, username) => {
+  if (!isUserWhitelisted(username)) {
+    const tweetTextElements = container.querySelectorAll('[data-testid="tweetText"]');
   tweetTextElements.forEach((element) => {
     element.remove();
   });
+}
 };
 
-const removeUserNameChildren = (container) => {
-  const userNameElements = container.querySelectorAll('[data-testid="UserName"]');
+const removeUserNameChildren = (container, username) => {
+  if (!isUserWhitelisted(username)) {
+    const userNameElements = container.querySelectorAll('[data-testid="UserName"]');
   userNameElements.forEach((element) => {
     element.replaceChildren();
   });
+}
 };
 
-const removeHeaderPhotoChildren = (container) => {
-  const headerPhotoElements = container.querySelectorAll('a[href*="/header_photo"]');
+const removeHeaderPhotoChildren = (container, username) => {
+  if (!isUserWhitelisted(username)) {
+    const headerPhotoElements = container.querySelectorAll('a[href*="/header_photo"]');
   headerPhotoElements.forEach((element) => {
     element.replaceChildren();
   });
+}
 };
 
-const removePhotoChildren = (container) => {
-  const photoElements = container.querySelectorAll('a[href*="/photo"]');
+const removePhotoChildren = (container, username) => {
+  if (!isUserWhitelisted(username)) {
+    const photoElements = container.querySelectorAll('a[href*="/photo"]');
   photoElements.forEach((element) => {
     element.replaceChildren();
   });
+}
 };
 
 
 const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
-    replaceContentWithWhitespace();
+    extractUsernames();
   });
 });
-const replaceContentWithWhitespace = () => {
-  const homeTimelineElement = document.querySelector('div[aria-label="Home timeline"]');
 
-  if (homeTimelineElement) {
-    const blueCheckmarks = homeTimelineElement.querySelectorAll(checkmarkSelector);
 
-    if (blueCheckmarks.length > 0) {
-      removeUserNameChildren(homeTimelineElement);
-      removeHeaderPhotoChildren(homeTimelineElement);
-      removePhotoChildren(homeTimelineElement);
-      removeUserDescription(homeTimelineElement);
+
+const extractUsernames = () => {
+  const tweetIds = document.querySelectorAll('[data-testid="tweet"]');
+
+  tweetIds.forEach((tweetElement) => {
+    const usernameElements = tweetElement.querySelectorAll('div[dir="ltr"] > span');
+    const usernames = new Set();
+
+    for (const usernameElement of usernameElements) {
+      const textContent = usernameElement.textContent;
+      if (textContent.includes('@')) {
+        usernames.add(textContent);
+      }
     }
 
-    blueCheckmarks.forEach((checkmark) => {
-      const articleElement = checkmark.closest('article');
-      if (articleElement) {
-        if (!isUserWhitelisted(articleElement)) {
-          // Find and process the child elements within the <article> element only if the user is not whitelisted
-          removeBackgroundImage(articleElement);
-          removeTweetText(articleElement);
-          removeUserAvatar(articleElement);
-          removeUserDescription(articleElement);
-          removeUserAvatarContainer(articleElement);
-          removeHeaderPhotoChildren(articleElement);
-          removePhotoChildren(articleElement);
-        }
+    // Check usernames against the whitelist and block content for non-whitelisted users
+    
+    console.log("whitelist: " + whitelist)
+    console.log("usernames: " + usernames)
+    usernames.forEach((username) => {
+      if (!isUserWhitelisted(username)) {
+        removeBackgroundImage(tweetElement, username); 
+        removeHeaderPhotoChildren(tweetElement, username);
+        removePhotoChildren(tweetElement, username);
+        removeTweetText(tweetElement, username);
+        removeUserNameChildren(tweetElement, username);
+        removeUserAvatar(tweetElement, username);
+        removeUserDescription(tweetElement, username);
+        removeUserAvatarContainer(tweetElement, username);
+        
       }
     });
-  }
+  });
 };
+const isUserWhitelisted = (username) => {
+  return whitelist.includes(username);
+};
+
+
+
 const config = {
   childList: true,
   subtree: true,
@@ -115,11 +157,14 @@ const config = {
 
 observer.observe(document.body, config);
 
-replaceContentWithWhitespace();
+
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'whitelistUpdated') {
-    console.log('Whitelist updated'); // Add this line to log that the message was received
+    console.log('Whitelist updated'); 
     replaceContentWithWhitespace();
   }
 });
+
+
+

@@ -14,23 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     };
   
-    addUserHandleButton.addEventListener('click', () => {
-      const userHandle = userHandleInput.value.trim();
-      if (userHandle) {
-        let whitelist = JSON.parse(localStorage.getItem('whitelist')) || [];
-        if (!whitelist.includes(userHandle)) {
-          whitelist.push(userHandle);
-          localStorage.setItem('whitelist', JSON.stringify(whitelist));
-          loadWhitelist();
-          userHandleInput.value = '';
-  
-          // Send the updated whitelist array to content.js
-          chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-            chrome.tabs.sendMessage(tabs[0].id, { action: 'arrayUpdated', data: whitelist });
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        // Replace this regex pattern with the appropriate pattern for your use case
+        
+        if (tabs[0].url.match('https:\/\/.*.twitter.com\/.*')) {
+          chrome.tabs.sendMessage(tabs[0].id, { type: 'request_data' }, (response) => {
+            // Process the response from the content script, if needed
+            console.log(response);
           });
         }
-      }
-    });
+      });
+      
   
     loadWhitelist();
   });
@@ -48,4 +42,31 @@ document.addEventListener('DOMContentLoaded', () => {
       chrome.tabs.sendMessage(tabId, { action: 'sendWhitelist', data: whitelist });
     }
   });
+  document.addEventListener('DOMContentLoaded', () => {
+    const addUserHandleButton = document.getElementById('addUserHandleButton');
   
+    addUserHandleButton.addEventListener('click', () => {
+      const userHandleInput = document.getElementById('userHandleInput');
+      const userHandle = userHandleInput.value;
+  
+      if (userHandle) {
+        // Add user handle to the whitelist array in storage
+        chrome.storage.local.get('whitelist', (storageData) => {
+          const whitelist = storageData.whitelist || [];
+          whitelist.push(userHandle);
+          chrome.storage.local.set({ whitelist }, () => {
+            // Send updated whitelist to content.js
+            chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+              chrome.tabs.sendMessage(tabs[0].id, { type: 'update_whitelist', whitelist }, (response) => {
+                // Process the response from the content script, if needed
+                console.log(response);
+              });
+            });
+          });
+        });
+      }
+    });
+  });
+
+  // popup.js
+// popup.js
