@@ -1,55 +1,125 @@
-function blockVerifiedTweets() {
-    // Find all instances of the <svg> element with the "Verified account" aria-label
-    const svgElements = document.querySelectorAll('svg[aria-label="Verified account"]');
-  
-    // Loop through each <svg> element and replace the content of the corresponding <div> element with whitespace
-    svgElements.forEach(svgElement => {
-      const tweetTextElement = svgElement.closest('[data-testid="tweet"]')?.querySelector('[data-testid="tweetText"]');
-      if (tweetTextElement) {
-        tweetTextElement.textContent = '';
-  
-        // Hide the tweet user avatar element
-        const tweetUserAvatarElement = tweetTextElement.closest('[data-testid="tweet"]').querySelector('[data-testid="Tweet-User-Avatar"]');
-        if (tweetUserAvatarElement !== null) {
-          tweetUserAvatarElement.style.display = 'none';
-        }
-        
+const checkmarkSelector = 'svg[data-testid="icon-verified"]';
+const whitelist = []; // Add user handles to the whitelist
 
-  
-        // Hide any images posted by the same user
-        const tweetImageElements = tweetTextElement.closest('[data-testid="tweet"]').querySelectorAll('img[src^="https://pbs.twimg.com/media/"][alt="Image"][draggable="true"]');
-        tweetImageElements.forEach(tweetImageElement => {
-          tweetImageElement.setAttribute('src', 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='); // small transparent image
-          tweetImageElement.setAttribute('data-src', tweetImageElement.getAttribute('src'));
-        });
-  
-        // Remove the background image from any <div> elements with a background-image property
-        const tweetMediaElements = tweetTextElement.closest('[data-testid="tweet"]').querySelectorAll('div[style*="background-image"]');
-        tweetMediaElements.forEach(tweetMediaElement => {
-          tweetMediaElement.style.backgroundImage = 'none';
-        });
+const getWhitelist = () => {
+  return JSON.parse(localStorage.getItem('whitelist')) || [];
+};
+
+const isUserWhitelisted = (container) => {
+  const userHandleElement = container.querySelector('div[dir="ltr"] > span');
+  if (userHandleElement) {
+    const userHandleText = userHandleElement.textContent;
+    //console.log(userHandleText); 
+    return getWhitelist().includes(userHandleText);
+  }
+  return false;
+};
+
+const removeBackgroundImage = (container) => {
+  const imageDiv = container.querySelector('div[data-testid="tweetPhoto"]');
+  if (imageDiv) {
+    imageDiv.replaceChildren();
+  }
+};
+
+const removeUserAvatar = (container) => {
+  const userAvatarDivs = container.querySelectorAll('div[data-testid="Tweet-User-Avatar"]');
+  userAvatarDivs.forEach((avatarDiv) => {
+    avatarDiv.replaceChildren();
+  });
+};
+
+const removeUserDescription = (container) => {
+  const userDescriptionDivs = container.querySelectorAll('div[data-testid="UserDescription"]');
+  userDescriptionDivs.forEach((descriptionDiv) => {
+    // Perform additional operations on the descriptionDiv here
+    descriptionDiv.replaceChildren();
+  });
+};
+
+const removeUserAvatarContainer = (container) => {
+  const userAvatarContainerDivs = container.querySelectorAll('div[data-testid^="UserAvatar-Container-"]');
+  userAvatarContainerDivs.forEach((avatarContainerDiv) => {
+    avatarContainerDiv.replaceChildren();
+  });
+};
+
+const removeTweetText = (container) => {
+  const tweetTextElements = container.querySelectorAll('[data-testid="tweetText"]');
+  tweetTextElements.forEach((element) => {
+    element.remove();
+  });
+};
+
+const removeUserNameChildren = (container) => {
+  const userNameElements = container.querySelectorAll('[data-testid="UserName"]');
+  userNameElements.forEach((element) => {
+    element.replaceChildren();
+  });
+};
+
+const removeHeaderPhotoChildren = (container) => {
+  const headerPhotoElements = container.querySelectorAll('a[href*="/header_photo"]');
+  headerPhotoElements.forEach((element) => {
+    element.replaceChildren();
+  });
+};
+
+const removePhotoChildren = (container) => {
+  const photoElements = container.querySelectorAll('a[href*="/photo"]');
+  photoElements.forEach((element) => {
+    element.replaceChildren();
+  });
+};
+
+
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    replaceContentWithWhitespace();
+  });
+});
+const replaceContentWithWhitespace = () => {
+  const homeTimelineElement = document.querySelector('div[aria-label="Home timeline"]');
+
+  if (homeTimelineElement) {
+    const blueCheckmarks = homeTimelineElement.querySelectorAll(checkmarkSelector);
+
+    if (blueCheckmarks.length > 0) {
+      removeUserNameChildren(homeTimelineElement);
+      removeHeaderPhotoChildren(homeTimelineElement);
+      removePhotoChildren(homeTimelineElement);
+      removeUserDescription(homeTimelineElement);
+    }
+
+    blueCheckmarks.forEach((checkmark) => {
+      const articleElement = checkmark.closest('article');
+      if (articleElement) {
+        if (!isUserWhitelisted(articleElement)) {
+          // Find and process the child elements within the <article> element only if the user is not whitelisted
+          removeBackgroundImage(articleElement);
+          removeTweetText(articleElement);
+          removeUserAvatar(articleElement);
+          removeUserDescription(articleElement);
+          removeUserAvatarContainer(articleElement);
+          removeHeaderPhotoChildren(articleElement);
+          removePhotoChildren(articleElement);
+        }
       }
     });
-    function resizeVideoComponent() {
-        const videoComponent = document.querySelector('div[data-testid="videoComponent"]');
-        if (videoComponent) {
-          videoComponent.style.height = '0';
-          videoComponent.style.width = '0';
-        }
-      }
-      
-      // Call the function immediately
-      resizeVideoComponent();
-      
-      // Call the function every 5 seconds
-      setInterval(resizeVideoComponent, 500);
-      
   }
-  
-  // Call the function immediately
-  blockVerifiedTweets();
-  
-  // Call the function every 5 seconds
-  setInterval(blockVerifiedTweets, 500);
-  
-  let isEnabled = false;
+};
+const config = {
+  childList: true,
+  subtree: true,
+};
+
+observer.observe(document.body, config);
+
+replaceContentWithWhitespace();
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'whitelistUpdated') {
+    console.log('Whitelist updated'); // Add this line to log that the message was received
+    replaceContentWithWhitespace();
+  }
+});
