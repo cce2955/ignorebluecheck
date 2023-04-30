@@ -3,25 +3,23 @@ let whitelist = []; // Add user handles to the whitelist
 if (chrome.storage) {
   // Fetch the whitelist from storage and store it in memory
   chrome.storage.local.get('whitelist', (storageData) => {
-    console.log(storageData);
+    
     whitelist = storageData.whitelist || [];
   });
 } else {
   console.error('chrome.storage is not available');
 }
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log(whitelist);
-  console.log("addlistenter")
+ 
   if (request.type === 'request_data') {
     // get the data you want to send to the popup
     const data = whitelist
     sendResponse({ data });
-    console.log("sending")
+   
   } else if (request.type === 'update_whitelist') {
     // Update the whitelist in memory
     whitelist = request.whitelist;
-    console.log(whitelist);
-    console.log("after update")
+  
     // Perform the required action with the updated whitelist and send a response, if needed
     sendResponse({ success: true });
   }
@@ -31,7 +29,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 const removeBackgroundImage = (container, username) => {
   console.log('Checking whitelist for', username);
   if (!isUserWhitelisted(username)) {
-    console.log(username + "is in the whitelist, allowing")
+    console.log(username + "is in not the whitelist, blocked")
     const imageDiv = container.querySelector('div[data-testid="tweetPhoto"]');
     if (imageDiv) {
       imageDiv.replaceChildren();
@@ -109,7 +107,17 @@ const observer = new MutationObserver((mutations) => {
   });
 });
 
+const startObserving = () => {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      observer.observe(document.body, config);
+    });
+  } else {
+    observer.observe(document.body, config);
+  }
+};
 
+startObserving();
 
 const extractUsernames = () => {
   const tweetIds = document.querySelectorAll('[data-testid="tweet"]');
@@ -127,8 +135,7 @@ const extractUsernames = () => {
 
     // Check usernames against the whitelist and block content for non-whitelisted users
     
-    console.log("whitelist: " + whitelist)
-    console.log("usernames: " + usernames)
+   
     usernames.forEach((username) => {
       if (!isUserWhitelisted(username)) {
         removeBackgroundImage(tweetElement, username); 
