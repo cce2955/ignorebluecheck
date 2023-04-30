@@ -1,13 +1,7 @@
 # Ignore blue checks
 
 
-Hi! This is a google extension that blocks all blue checks from Twitter. It's still a work in progress so it doesn't block everything but it should block out 99% of things. You can manually block on your account or use one of the already available blue blockers, but this is intended for people who browse with alternate accounts or aren't logged in yet that don't want to manage a huge blocklist.
-
-# Whitelist support
-Okay, maybe your friend bought a blue checkmark, maybe the person using the blue checkmark is actually supplying actually good content, I hear you, when you click on the extension, you get a whitelist manager!!! Whitelist a twitter user with a blue checkmark by adding their @ identifier (@[username]) and look at all their content with no restrictions. The rest of the checkmarks remain blacklisted. And if you somehow get tired of them? Just tap remove and you'll never see them again. This functionality is local to your device, so sorry if you want it synced across google devices. Again if demand is high enough I'll add it
-<p align="center">
-<img src="https://user-images.githubusercontent.com/44739551/235367374-2e87fc11-e7be-4e47-9943-50ccbad27783.png" alt="whitelist manager"/>
-</p>
+Hi! This is a google extension that blocks all blue checks from Twitter. It's still a work in progress so it doesn't block everything but it should block out 90% of things. You can manually block on your account or use one of the already available blue blockers, but this is intended for people who browse without their account or aren't logged in yet.
 
 # Your feed without Extension
 <p align="center">
