@@ -33,9 +33,9 @@ Hi! This is a google extension that blocks all blue checks from Twitter. It's st
 * Normally I wouldn't care and one point I did find the subscriber drama humorous but after a while certain blue checkmarks that I know I have blocked seemed to creep back into my view and I'm just tired of it, and I'm certain people are even more annoyed by them. So here's the tool
 
 ## todo
-add a button to disable functionality if needed, user has to manually disable via extensions, which technically is the point but still...
-some ads are coming through, add a function to block ads
-the functionality to block banners and user descriptions is not working properly, but to be fair if you're going to their page you may be interested in seeing those things, considering if this is worth the effort
-Maybe, maybe, very slight maybe add in functionality to not block content if checkmark user is replying to non-checkmark user
-maybe add some CSS to the whitelist GUI so it looks more professional
-possibly add elements next to checkmark users so you can click to block instead of typing in the name? That's an idea
+* Add a button to disable functionality if needed, user has to manually disable via extensions, which technically is the point but still...
+* Some ads are coming through, add a function to block ads
+* The functionality to block banners and user descriptions is not working properly, but to be fair if you're going to their page you may be interested in seeing those things, considering if this is worth the effort
+* Maybe, maybe, very slight maybe add in functionality to not block content if checkmark user is replying to non-checkmark user
+* Maybe add some CSS to the whitelist GUI so it looks more professional
+* Possibly add elements next to checkmark users so you can click to block instead of typing in the name? That's an idea
