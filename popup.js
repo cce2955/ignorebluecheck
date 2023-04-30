@@ -1,34 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const userHandleInput = document.getElementById('userHandleInput');
-    const addUserHandleButton = document.getElementById('addUserHandleButton');
-    const whitelistElement = document.getElementById('whitelist');
-  
-    const loadWhitelist = () => {
-      const whitelist = JSON.parse(localStorage.getItem('whitelist')) || [];
-      console.log(whitelist); 
-      whitelistElement.innerHTML = '';
-      whitelist.forEach((handle) => {
-        const listItem = document.createElement('li');
-        listItem.textContent = handle;
-        whitelistElement.appendChild(listItem);
-      });
-    };
-  
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        // Replace this regex pattern with the appropriate pattern for your use case
-        
-        if (tabs[0].url.match('https:\/\/.*.twitter.com\/.*')) {
-          chrome.tabs.sendMessage(tabs[0].id, { type: 'request_data' }, (response) => {
-            // Process the response from the content script, if needed
-            console.log(response);
-          });
-        }
-      });
-      
-  
+  const userHandleInput = document.getElementById('userHandleInput');
+  const addUserHandleButton = document.getElementById('addUserHandleButton');
+  const whitelistElement = document.getElementById('whitelist');
+
+  const loadWhitelist = () => {
+    const whitelist = JSON.parse(localStorage.getItem('whitelist')) || [];
+    console.log(whitelist);
+    whitelistElement.innerHTML = '';
+    whitelist.forEach((handle) => {
+      const listItem = document.createElement('li');
+      listItem.textContent = handle;
+
+      const removeButton = document.createElement('button');
+      removeButton.innerText = 'Remove';
+      removeButton.onclick = () => {
+        removeUserFromWhitelist(handle);
+      };
+      listItem.appendChild(removeButton);
+      whitelistElement.appendChild(listItem);
+    });
+  };
+
+  const removeUserFromWhitelist = (userHandle) => {
+    const whitelist = JSON.parse(localStorage.getItem('whitelist')) || [];
+    const updatedWhitelist = whitelist.filter((handle) => handle !== userHandle);
+    localStorage.setItem('whitelist', JSON.stringify(updatedWhitelist));
     loadWhitelist();
+  };
+
+  addUserHandleButton.addEventListener('click', () => {
+    const userHandle = userHandleInput.value;
+    const whitelist = JSON.parse(localStorage.getItem('whitelist')) || [];
+    whitelist.push(userHandle);
+    localStorage.setItem('whitelist', JSON.stringify(whitelist));
+    loadWhitelist();
+    userHandleInput.value = '';
   });
-  
+
+  loadWhitelist();
+});
+
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'requestWhitelist') {
       const whitelist = JSON.parse(localStorage.getItem('whitelist')) || [];
