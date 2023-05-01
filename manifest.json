@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Whitelist Manager",
+  "name": "Twitter Blue Blocker Whitelist Manager",
   "version": "1.0",
   "description": "My extension description",
   "host_permissions": [

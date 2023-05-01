@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
             const removeButton = document.createElement('button');
             removeButton.innerText = 'Remove';
+            removeButton.classList.add('glossy-btn')
             removeButton.onclick = () => {
               removeUserFromWhitelist(handle);
             };

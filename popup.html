@@ -2,190 +2,27 @@
 <html>
   <head>
     <title>Whitelist Manager</title>
-    <style>
-
-      body {
-        width: 350px;
-        padding: 16px;
-        background-image: linear-gradient(rgba(255, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
-        background-position: bottom;
-        background-repeat: no-repeat;
-        background-size: 100% 100px;
-        color: white;
-        animation: cycleFire 3s infinite;
-        flex-direction: column;
-        align-items: center;
-      }
-      body {
-        width: 350px;
-        padding: 16px;
-        background-image: linear-gradient(rgba(255, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("icons/icon128.png");
-        background-size: cover;
-        color: white;
-        animation: flicker 1s infinite alternate;
-        flex-direction: column;
-        align-items: center;
-      }
-      #header {
-        position: relative;
-        padding: 10px;
-        border-radius: 20px;
-        background-color: rgba(0, 0, 0, 0.5);
-        margin: 0 auto 16px auto; 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-bottom: 16px;
-        border-bottom: 1px solid #ccc;
-        width: calc(100% - 40px);
-      }
-
-      h1 {
-        display: flex;
-        align-items: left;
-        padding-left: 20px;
-        padding-right: 4px; 
-        margin: 0;
-      }
-
-      h1 img {
-        height: 1em;
-        margin-left: 8px;
-        margin-right: 20px; 
-        transform: scale(3);
-      }
-
-      h2 {
-        color: white;
-        border-bottom: 1px solid black;
-        margin-bottom: 16px;
-      }
-      
-      #input-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 16px;
-      }
-      #whitelist {
-        margin-top: 16px;
-      }
-      button {
-        border-radius: 25px;
-        background-image: linear-gradient(to top right, #1E90FF, #FFFFFF);
-        color: #f0f0f0;
-        border-radius: 50px;
-        text-shadow: 1px 1px 2px black;
-        border: none;
-        padding: 8px 16px;
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        cursor: pointer;
-        white-space: nowrap;
-      }
-      button:hover {
-        opacity: 0.8;
-      }
-      li {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 8px;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.5s, transform 0.5s;
-      }
-      
-      li.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      
-            
-      @keyframes slideInFromLeft {
-        0% {
-          transform: translateX(-100%);
-        }
-        100% {
-          transform: translateX(0);
-        }
-      }
-      
-      .popup-box {
-        animation: slideInFromLeft 0.5s ease-out forwards;
-      }
-      
-      @keyframes fadeIn {
-        0% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
-      }
-      
-      .popup-box-container {
-        animation: fadeIn 0.5s ease-in forwards;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-      }
-      .whitelisted-user {
-        display: inline-block;
-        padding: 10px;
-        background: linear-gradient(to right, black, 2%, transparent);
-        border-radius: 50px;
-        height: 0;
-        overflow: hidden;
-        transition: height 0.5s ease-out;
-      }
-      
-      .whitelisted-user.show {
-        height: auto;
-        transition: height 1s ease-in-out;
-      }
-      
-      @keyframes slideInFromRight {
-        0% {
-          transform: translateX(100%);
-          opacity: 0;
-        }
-        100% {
-          transform: translateX(0);
-          opacity: 1;
-        }
-      }
-      
-      .kofi-link {
-        font-size: small;
-        margin-top: 10px;
-        text-align: center; /* Align the link to the center */
-        padding: 10px; /* Add padding */
-      }
-
-      
-    </style>
+    <link href="styles.css" rel="stylesheet" type="text/css">
     <script src="popup.js"></script>
   </head>
   <body>
     <div class="popup-box-container">
       <div class="popup-box">
-    <div id="header">
-      <h1>Whitelist Manager
-      <img src="mascot/p2.png" alt="Icon">
-    </h1>
+        <div id="header">
+          <h1 class="whitelist-manager">Whitelist Manager
+            <img src="mascot/p2.png" alt="Icon">
+          </h1>
+        </div>
+        <div id="input-container">
+          <input id="userHandleInput" type="text" placeholder="Enter user handle (e.g., @username)" style="width: 200px" />
+          <button id="addUserHandleButton" class="glossy-btn">Add to Whitelist</button>
+        </div>
+        <h2>Whitelisted Users</h2>
+        <div id="whitelist"></div>
+        <p class="kofi-link">
+          <a href="https://ko-fi.com/cce29555" class="kofi-link glossy-btn">Buy me a kofi</a>
+        </p>
+      </div>
     </div>
-    <div id="input-container">
-      <input id="userHandleInput" type="text" placeholder="Enter user handle (e.g., @username)" style="width: 200px" />
-      <button id="addUserHandleButton">Add to Whitelist</button>
-    </div>
-    <h2>Whitelisted Users</h2>
-    <div id="whitelist">
-      
-    </div>
-    <p class="kofi-link">
-      <a href="https://ko-fi.com/cce29555">Buy me a kofi</a>
-      </p>
-    </div></div>
   </body>
 </html>
