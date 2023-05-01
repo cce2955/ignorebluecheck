@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             listItem.appendChild(removeButton);
             whitelistElement.appendChild(listItem);
+            setTimeout(() => {
+                listItem.classList.add('visible');
+              }, 100);
           });
         }
       });
@@ -32,6 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const whitelist = data.whitelist || [];
           const updatedWhitelist = whitelist.filter((handle) => handle !== userHandle);
           chrome.storage.local.set({ whitelist: updatedWhitelist }, loadWhitelist);
+          listItem.classList.remove('visible');
+          setTimeout(() => {
+            listItem.remove();
+            loadWhitelist();
+          }, 500);
         });
       };
       
