@@ -2,20 +2,28 @@
 - [Installation](#installation)
 - [What's blocked](#whats-blocked)
 - [Why?](#why)
-- [Todo](#Todo)
+- [todo](#todo)
 
 # Introduction
 
 Hi! This is a google extension that blocks all blue checks from Twitter. It's still a work in progress so it doesn't block everything but it should block out 90% of things. You can manually block on your account or use one of the already available blue blockers, but this is intended for people who browse without their account or aren't logged in yet.
 
-## Your feed without Extension
+# Whitelist Feature
+Okay I hear you, your best friend has a blue checkmark, you like that one account that posts the funny cat videos, you want to talk to your favorite game developer in english so he'll block you, okay, fine, when you open your extension, you can add the user by their @identifier (@[username]) and they will not be blocked by this app.
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/44739551/235334809-0f171b82-4bc2-4263-826a-45630c3b8632.png" alt="Your feed without Extension" />
+<img src="https://user-images.githubusercontent.com/44739551/235393791-073d889c-92d2-43f5-8ba6-d6a2f67bb94b.png"/>
+<p>
+
+## Your feed without Extension
+Here's your life without the extension, Don't be fooled by the cats, and if you are fooled, remember you can whitelist them
+<p align="center">
+<img src="https://user-images.githubusercontent.com/44739551/235394217-578a1eb6-3ff5-46e2-928d-6c031bff283a.png" />
 </p>
 
 ## Your feed with Extension
+Here's your feed after the extension, the cats were a worthy sacrifice.....well at least you can whitelist them
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/44739551/235334811-e56511e1-5e08-4d42-b7b2-31cf7cf7804f.png" alt="Your feed with Extension" />
+ <img src="https://user-images.githubusercontent.com/44739551/235394381-bb65f083-fc81-4e21-bded-699d2c03992d.png"/>
 </p>
 
 ## Installation
@@ -37,5 +45,6 @@ Hi! This is a google extension that blocks all blue checks from Twitter. It's st
 * Some ads are coming through, add a function to block ads
 * The functionality to block banners and user descriptions is not working properly, but to be fair if you're going to their page you may be interested in seeing those things, considering if this is worth the effort
 * Maybe, maybe, very slight maybe add in functionality to not block content if checkmark user is replying to non-checkmark user
-* Maybe add some CSS to the whitelist GUI so it looks more professional
+* <s>Maybe add some CSS to the whitelist GUI so it looks more professional</s>
 * Possibly add elements next to checkmark users so you can click to block instead of typing in the name? That's an idea
+
