@@ -2,12 +2,70 @@
 <html>
   <head>
     <title>Whitelist Manager</title>
+    <style>
+      body {
+        width: 350px;
+        padding: 16px;
+        background-image: linear-gradient(rgba(255, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("icon128.png");
+        background-size: cover;
+        color: white;
+      }
+      h1 {
+        text-shadow: 1px 1px 2px black;
+      }
+      h2 {
+        color: white;
+        border-bottom: 1px solid black;
+        margin-bottom: 16px;
+      }
+      #header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #ccc;
+      }
+      #input-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+      #whitelist {
+        margin-top: 16px;
+      }
+      button {
+        border-radius: 25px;
+        background-image: linear-gradient(to top right, #1E90FF, #FFFFFF);
+        color: white;
+        text-shadow: 1px 1px 2px black;
+        border: none;
+        padding: 8px 16px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      button:hover {
+        opacity: 0.8;
+      }
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+    </style>
     <script src="popup.js"></script>
   </head>
   <body>
-    <h1>Whitelist Manager</h1>
-    <input id="userHandleInput" type="text" placeholder="Enter user handle (e.g., @username)" />
-    <button id="addUserHandleButton">Add to Whitelist</button>
+    <div id="header">
+      <h1>Whitelist Manager</h1>
+    </div>
+    <div id="input-container">
+      <input id="userHandleInput" type="text" placeholder="Enter user handle (e.g., @username)" style="width: 200px" />
+      <button id="addUserHandleButton">Add to Whitelist</button>
+    </div>
+    <h2>Whitelisted Users</h2>
     <div id="whitelist"></div>
   </body>
 </html>
