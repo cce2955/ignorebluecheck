@@ -6,7 +6,7 @@
 
 # Introduction
 
-Hi! This is a google extension that blocks all blue checks from Twitter. It's still a work in progress so it doesn't block everything but it should block out 99% of things. You can manually block on your account or use one of the already available blue blockers, but this is intended for people who browse without their account or aren't logged in yet.
+Hi! This is a google extension that blocks all blue checks from Twitter. It's still a work in progress so it doesn't block everything but it should block out 99% of things. You can manually block on your account or use one of the already available blue blockers, but this works even when you're not logged in and doesn't use any data from both google or twitter. It may use google data when I upload the extension to the extension marketplace but that's in the future
 
 # Whitelist Feature
 Okay I hear you, your best friend has a blue checkmark, you like that one account that posts the funny cat videos, you want to talk to your favorite game developer in english so he'll block you, okay, fine. 
