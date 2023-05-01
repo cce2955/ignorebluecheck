@@ -50,7 +50,7 @@ Here's your feed after the extension, the cats were a worthy sacrifice.....well 
 * If demand is high I'll change it, but right now you can only see "who" you are ignoring, but all text, videos, and pictures from a user with a blue checkmark should be unable to load. At the moment if someone posts an external link (youtube video, news artcile, etc.) that is not blocked but I think that's fair enough since usually they link other people's videos.
 
 ## Why?
-* Normally I wouldn't care and one point I did find the subscriber drama humorous but after a while certain blue checkmarks that I know I have blocked seemed to creep back into my view and I'm just tired of it, and I'm certain people are even more annoyed by them. So here's the tool
+* I wouldn't be shocked if half the blue verified are bots themselves as most of them add so little to a conversation and just repost to farm views at this point. The only reason I even added the whitelist was for the few who actually do "produce content" or have insightful commentary.
 
 ## todo
 * Add a button to disable functionality if needed, user has to manually disable via extensions, which technically is the point but still...
