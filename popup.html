@@ -3,6 +3,19 @@
   <head>
     <title>Whitelist Manager</title>
     <style>
+
+      body {
+        width: 350px;
+        padding: 16px;
+        background-image: linear-gradient(rgba(255, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: 100% 100px;
+        color: white;
+        animation: cycleFire 3s infinite;
+        flex-direction: column;
+        align-items: center;
+      }
       body {
         width: 350px;
         padding: 16px;
@@ -142,18 +155,13 @@
           opacity: 1;
         }
       }
-      @keyframes flicker {
-        0% {
-          background-image: linear-gradient(rgba(255, 0, 0, 0.3) 20%, rgba(0, 0, 0, 0.3) 80%), url("icons/icon128.png");
-        }
-        50% {
-          background-image: linear-gradient(rgba(255, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0.3) 70%), url("icons/icon128.png");
-        }
-        100% {
-          background-image: linear-gradient(rgba(255, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0.3) 60%), url("icons/icon128.png");
-        }
+      
+      .kofi-link {
+        font-size: small;
+        margin-top: 10px;
+        text-align: center; /* Align the link to the center */
+        padding: 10px; /* Add padding */
       }
-     
 
       
     </style>
@@ -172,6 +180,12 @@
       <button id="addUserHandleButton">Add to Whitelist</button>
     </div>
     <h2>Whitelisted Users</h2>
-    <div id="whitelist"></div></div></div>
+    <div id="whitelist">
+      
+    </div>
+    <p class="kofi-link">
+      <a href="https://ko-fi.com/cce29555">Buy me a kofi</a>
+      </p>
+    </div></div>
   </body>
 </html>
