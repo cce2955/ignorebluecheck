@@ -39,7 +39,7 @@ Here's your feed after the extension, the cats were a worthy sacrifice.....well 
 </p>
 
 ## Installation
-* Download a zip archive of this page
+* Download a zip archive on the main page under code, or [click here](https://github.com/cce2955/ignorebluecheck/archive/refs/heads/main.zip)
 * Go to your extensions
 * In the top right, toggle "developer mode"
 * Click "load unpacked"
