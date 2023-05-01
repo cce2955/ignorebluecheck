@@ -59,6 +59,7 @@ Here's your feed after the extension, the cats were a worthy sacrifice.....well 
 * Maybe, maybe, very slight maybe add in functionality to not block content if checkmark user is replying to non-checkmark user
 * <s>Maybe add some CSS to the whitelist GUI so it looks more professional</s>
 * Possibly add elements next to checkmark users so you can click to block instead of typing in the name? That's an idea
+* Upload it to the play store
 
 # I'll take a kofi
 Want to buy me a [kofi?](https://ko-fi.com/cce29555), okay sure, thanks!! What's that you're hiring for a junior developer position? Don't tell this page, [tell me](mailto:cce29555@gmail.com)!!
