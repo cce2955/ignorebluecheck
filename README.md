@@ -9,9 +9,21 @@
 Hi! This is a google extension that blocks all blue checks from Twitter. It's still a work in progress so it doesn't block everything but it should block out 99% of things. You can manually block on your account or use one of the already available blue blockers, but this is intended for people who browse without their account or aren't logged in yet.
 
 # Whitelist Feature
-Okay I hear you, your best friend has a blue checkmark, you like that one account that posts the funny cat videos, you want to talk to your favorite game developer in english so he'll block you, okay, fine, when you open your extension, you can add the user by their @identifier (@[username]) and they will not be blocked by this app.
+Okay I hear you, your best friend has a blue checkmark, you like that one account that posts the funny cat videos, you want to talk to your favorite game developer in english so he'll block you, okay, fine. 
+
+* After installing the extension, go ahead and give "Twitter Blue Blocker Whitelist Manager" a click
 <p align="center">
-<img src="https://user-images.githubusercontent.com/44739551/235393791-073d889c-92d2-43f5-8ba6-d6a2f67bb94b.png"/>
+<img src="https://user-images.githubusercontent.com/44739551/235465259-43f92516-28a6-4ead-8648-c84bec18f2f4.png"/>
+<p>
+
+* After clicking, add their @identifier in the input box and click "Add to Whitelist", this will...uh, add them to the white list
+<p align="center">
+<img src="https://user-images.githubusercontent.com/44739551/235456811-103ae248-faec-4f7f-827a-fe9856feb346.png"/>
+<p>
+
+* Now this person gets a free pass to your eyeballs. Anything they post, including text, video, pictures, is now free for you to consume.
+<p align="center">
+<img src="https://user-images.githubusercontent.com/44739551/235462904-74df0ec2-8a20-4a3f-a2b1-912daf3871e7.png"/>
 <p>
 
 ## Your feed without Extension
@@ -21,10 +33,8 @@ Here's your life without the extension, Don't be fooled by the cats, and if you 
 </p>
 
 ## Your feed with Extension
-Here's your feed after the extension, the cats were a worthy sacrifice.....well at least you can whitelist them
+Here's your feed after the extension, the cats were a worthy sacrifice.....well at least you can whitelist them. Notice that the guy without the checkmark has free reign on your attention
 <p align="center">
-
-
  <img src="https://user-images.githubusercontent.com/44739551/235394853-86d44d28-c042-47c2-9a3f-9b14b55d4b60.png"/>
 </p>
 
@@ -34,10 +44,10 @@ Here's your feed after the extension, the cats were a worthy sacrifice.....well 
 * In the top right, toggle "developer mode"
 * Click "load unpacked"
 * After unzipping this archive, select the extracted folder
-* Activate the extension in your settings if needed but after that it should run on its own. There may be a small delay on videos as technically they are still loading in your cache but I whipped this up in like 2 hours so whatever, Enjoy your peace.
+* The extension should be activated as soon as it's installed, if not you can manually activate it under "manage extensions". If you want to see the blocked users, simply go back to "Manage extensions" and turn it off, the next time you refresh a page, all the blocked content should be unblocked.
 
 ## What's blocked
-* If demand is high I'll change it, but right now you can only see "who" you are ignoring, but all text, videos, and pictures from a user with a blue checkmark should be unable to load. As a bonus it seems to block some ads too, wasn't even my intent but I'll take it.
+* If demand is high I'll change it, but right now you can only see "who" you are ignoring, but all text, videos, and pictures from a user with a blue checkmark should be unable to load. At the moment if someone posts an external link (youtube video, news artcile, etc.) that is not blocked but I think that's fair enough since usually they link other people's videos.
 
 ## Why?
 * Normally I wouldn't care and one point I did find the subscriber drama humorous but after a while certain blue checkmarks that I know I have blocked seemed to creep back into my view and I'm just tired of it, and I'm certain people are even more annoyed by them. So here's the tool
@@ -50,3 +60,5 @@ Here's your feed after the extension, the cats were a worthy sacrifice.....well 
 * <s>Maybe add some CSS to the whitelist GUI so it looks more professional</s>
 * Possibly add elements next to checkmark users so you can click to block instead of typing in the name? That's an idea
 
+# I'll take a kofi
+Want to buy me a [kofi?](https://ko-fi.com/cce29555), okay sure, thanks!! What's that you're hiring for a junior developer position? Don't tell this page, [tell me](mailto:cce29555@gmail.com)!!
