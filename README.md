@@ -23,7 +23,9 @@ Here's your life without the extension, Don't be fooled by the cats, and if you 
 ## Your feed with Extension
 Here's your feed after the extension, the cats were a worthy sacrifice.....well at least you can whitelist them
 <p align="center">
- <img src="https://user-images.githubusercontent.com/44739551/235394381-bb65f083-fc81-4e21-bded-699d2c03992d.png"/>
+
+
+ <img src="https://user-images.githubusercontent.com/44739551/235394853-86d44d28-c042-47c2-9a3f-9b14b55d4b60.png"/>
 </p>
 
 ## Installation
