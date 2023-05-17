@@ -1,10 +1,22 @@
+/**
+ * The CSS selector for the checkmark icon element.
+ * Used to identify the presence of a verified account.
+ */
 const checkmarkSelector = 'svg[data-testid="icon-verified"]';
 console.log('checkmarkSelector:', checkmarkSelector);
 
-let whitelist = []; // Add user handles to the whitelist
+/**
+ * The whitelist of user handles.
+ * User handles can be added to this whitelist to determine which elements should be removed.
+ */
+let whitelist = [];
 console.log('whitelist:', whitelist);
+
+/**
+ * Fetches the whitelist from storage (if available) and stores it in memory.
+ * If chrome.storage is not available, an error is logged.
+ */
 if (chrome.storage) {
-  // Fetch the whitelist from storage and store it in memory
   chrome.storage.local.get('whitelist', (storageData) => {
     whitelist = storageData.whitelist || [];
     console.log('Fetched whitelist from storage:', whitelist);
@@ -13,18 +25,34 @@ if (chrome.storage) {
   console.error('chrome.storage is not available');
 }
 
+/**
+ * Listener for incoming messages from the background script or popup.
+ * Handles requests for data and updates to the whitelist.
+ *
+ * @param {Object} request - The incoming message object.
+ * @param {Object} sender - Information about the sender of the message.
+ * @param {Function} sendResponse - A callback function to send a response asynchronously.
+ */
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === 'request_data') {
+    // Responds to a request for whitelist data by sending the current whitelist.
     const data = whitelist;
     console.log('Sending whitelist data:', data);
     sendResponse({ data });
   } else if (request.type === 'update_whitelist') {
+    // Updates the whitelist with the provided data and sends a success response.
     whitelist = request.whitelist;
     console.log('Whitelist updated:', whitelist);
     sendResponse({ success: true });
   }
 });
-
+/**
+ * Determines whether an element should be removed based on the container, username, checkmark presence, and whitelist.
+ *
+ * @param {Element} container - The container element containing the element to be checked.
+ * @param {string} username - The username associated with the element.
+ * @returns {boolean} - True if the element should be removed, false otherwise.
+ */
 const shouldRemove = (container, username) => {
   const checkmarkElement = container.querySelector(checkmarkSelector);
   const hasCheckmark = checkmarkElement != null;
@@ -32,6 +60,12 @@ const shouldRemove = (container, username) => {
   return (hasCheckmark && !whitelist.includes(username)) || (!hasCheckmark && whitelist.includes(username));
 };
 
+/**
+ * Removes the background image for a specific username within a container element.
+ *
+ * @param {Element} container - The container element containing the background image.
+ * @param {string} username - The username associated with the background image.
+ */
 const removeBackgroundImage = (container, username) => {
   if (shouldRemove(container, username)) {
     console.log('Removing background image for', username);
@@ -42,6 +76,12 @@ const removeBackgroundImage = (container, username) => {
   }
 };
 
+/**
+ * Removes the user avatar for a specific username within a container element.
+ *
+ * @param {Element} container - The container element containing the user avatar.
+ * @param {string} username - The username associated with the user avatar.
+ */
 const removeUserAvatar = (container, username) => {
   if (shouldRemove(container, username)) {
     console.log('Removing user avatar for', username);
@@ -52,6 +92,12 @@ const removeUserAvatar = (container, username) => {
   }
 };
 
+/**
+ * Removes the user description for a specific username within a container element.
+ *
+ * @param {Element} container - The container element containing the user description.
+ * @param {string} username - The username associated with the user description.
+ */
 const removeUserDescription = (container, username) => {
   if (shouldRemove(container, username)) {
     console.log('Removing user description for', username);
@@ -62,6 +108,12 @@ const removeUserDescription = (container, username) => {
   }
 };
 
+/**
+ * Removes the user avatar container for a specific username within a container element.
+ *
+ * @param {Element} container - The container element containing the user avatar container.
+ * @param {string} username - The username associated with the user avatar container.
+ */
 const removeUserAvatarContainer = (container, username) => {
   if (shouldRemove(container, username)) {
     console.log('Removing user avatar container for', username);
@@ -72,6 +124,12 @@ const removeUserAvatarContainer = (container, username) => {
   }
 };
 
+/**
+ * Removes the tweet text for a specific username within a container element.
+ *
+ * @param {Element} container - The container element containing the tweet text.
+ * @param {string} username - The username associated with the tweet text.
+ */
 const removeTweetText = (container, username) => {
   if (shouldRemove(container, username)) {
     console.log('Removing tweet text for', username);
@@ -82,6 +140,12 @@ const removeTweetText = (container, username) => {
   }
 };
 
+/**
+ * Removes the children elements of the user name element for a specific username within a container element.
+ *
+ * @param {Element} container - The container element containing the user name element.
+ * @param {string} username - The username associated with the user name element.
+ */
 const removeUserNameChildren = (container, username) => {
   if (shouldRemove(container, username)) {
     console.log('Removing user name children for', username);
@@ -92,6 +156,11 @@ const removeUserNameChildren = (container, username) => {
   }
 };
 
+/**
+ * Removes the children elements of the header photo element within a container element.
+ *
+ * @param {Element} container - The container element containing the header photo element.
+ */
 const removeHeaderPhotoChildren = (container) => {
   console.log('Removing header photo children');
   const headerPhotoElements = container.querySelectorAll('a[href*="/header_photo"]');
@@ -100,6 +169,12 @@ const removeHeaderPhotoChildren = (container) => {
   });
 };
 
+/**
+ * Removes the children elements of the photo elements for a specific username within a container element.
+ *
+ * @param {Element} container - The container element containing the photo elements.
+ * @param {string} username - The username associated with the photo elements.
+ */
 const removePhotoChildren = (container, username) => {
   if (shouldRemove(container, username)) {
     console.log('Removing photo children for', username);
@@ -109,13 +184,20 @@ const removePhotoChildren = (container, username) => {
     });
   }
 };
-
+/**
+ * A MutationObserver that triggers the extraction of usernames upon mutations.
+ *
+ * @param {MutationRecord[]} mutations - An array of mutation records.
+ */
 const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
     extractUsernames();
   });
 });
 
+/**
+ * Starts observing the document for mutations and triggers the extraction of usernames.
+ */
 const startObserving = () => {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
@@ -130,6 +212,10 @@ const startObserving = () => {
 
 startObserving();
 
+/**
+ * Extracts usernames from tweet elements in the document and checks them against the whitelist.
+ * Blocks content for non-whitelisted users.
+ */
 const extractUsernames = () => {
   const tweetIds = document.querySelectorAll('[data-testid="tweet"]');
   console.log('extractUsernames - tweetIds:', tweetIds);
@@ -166,15 +252,28 @@ const extractUsernames = () => {
   });
 };
 
+/**
+ * Checks if a username is whitelisted.
+ *
+ * @param {string} username - The username to check.
+ * @returns {boolean} - True if the username is whitelisted, false otherwise.
+ */
 const isUserWhitelisted = (username) => {
   return whitelist.includes(username);
 };
 
+/**
+ * Configuration options for the MutationObserver.
+ */
 const config = {
   childList: true,
   subtree: true,
 };
 
+/**
+ * Listens for whitelist update messages from the extension.
+ * Triggers the replacement of content with whitespace.
+ */
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'whitelistUpdated') {
     console.log('Whitelist updated');
@@ -182,6 +281,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
+/**
+ * Listens for content loaded messages from the extension.
+ * Sends a response indicating that the content script is ready.
+ */
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'waitForContentLoaded') {
     sendResponse({ action: 'contentScriptReady' });
