@@ -115,12 +115,11 @@ const startObserving = () => {
 };
 
 startObserving();
-
 const extractUsernames = () => {
   const tweetIds = document.querySelectorAll('[data-testid="tweet"]');
 
   tweetIds.forEach((tweetElement) => {
-    const usernameElements = tweetElement.querySelectorAll('div[dir="ltr"] > span');
+    const usernameElements = tweetElement.querySelectorAll('div[dir="ltr"] > span, div[dir="ltr"] ~ * > span');
     const usernames = new Set();
 
     for (const usernameElement of usernameElements) {
@@ -131,23 +130,33 @@ const extractUsernames = () => {
     }
 
     // Check usernames against the whitelist and block content for non-whitelisted users
-    
-   
+    const primaryColumn = document.querySelector('[data-testid="primaryColumn"]');
     usernames.forEach((username) => {
       if (!isUserWhitelisted(username)) {
-        removeBackgroundImage(tweetElement, username); 
-        removeHeaderPhotoChildren(tweetElement, username);
+        removeBackgroundImage(tweetElement, username);
+        
         removePhotoChildren(tweetElement, username);
         removeTweetText(tweetElement, username);
         removeUserNameChildren(tweetElement, username);
         removeUserAvatar(tweetElement, username);
-        removeUserDescription(tweetElement, username);
-        removeUserAvatarContainer(tweetElement, username);
+        removeHeaderPhotoChildren(primaryColumn);
+        removeUserDescription(primaryColumn);
+        removeUserAvatarContainer(primaryColumn);
+        
         
       }
+      
+      
     });
   });
+
+  
+  
 };
+
+
+
+
 const isUserWhitelisted = (username) => {
   return whitelist.includes(username);
 };
