@@ -168,7 +168,7 @@ const config = {
   subtree: true,
 };
 
-observer.observe(document.body, config);
+
 
 
 
