@@ -17,42 +17,46 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   const loadWhitelist = () => {
     console.log('Loading Whitelist');
-    
+  
     // Retrieve the whitelist from the local storage
     chrome.storage.local.get('whitelist', (data) => {
       const whitelist = data.whitelist || [];
-
+  
       // Clear the existing whitelist
       whitelistElement.innerHTML = '';
-
+  
       // Render each whitelist item
       whitelist.forEach((handle) => {
         console.log('Adding handle:', handle);
-
+  
         // Create a list item element
         const listItem = document.createElement('li');
         listItem.textContent = handle;
         listItem.classList.add('visible');
-
+  
         // Create a remove button for each list item
         const removeButton = document.createElement('button');
         removeButton.innerText = 'Remove';
         removeButton.classList.add('glossy-btn');
-
-        // Add event listener to remove the user handle
-        removeButton.addEventListener('click', () => {
-          removeUserFromWhitelist(handle);
-        });
-
+        removeButton.dataset.userHandle = handle; // Store the user handle as a data attribute
+  
         // Append the remove button to the list item
         listItem.appendChild(removeButton);
-
+  
         // Append the list item to the whitelist element
         whitelistElement.appendChild(listItem);
       });
     });
   };
-
+  
+  // Add event listener for the remove button click event using event delegation
+  whitelistElement.addEventListener('click', (event) => {
+    if (event.target.tagName === 'BUTTON') {
+      const userHandle = event.target.dataset.userHandle;
+      removeUserFromWhitelist(userHandle);
+    }
+  });
+  
   /**
    * This function removes a user handle from the whitelist.
    *
@@ -60,31 +64,83 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   const removeUserFromWhitelist = (userHandle) => {
     console.log('Removing user handle:', userHandle);
-    
+  
     // Retrieve the whitelist from the local storage
     chrome.storage.local.get('whitelist', (data) => {
       const whitelist = data.whitelist || [];
-
+  
       // Filter out the user handle to be removed
       const updatedWhitelist = whitelist.filter((handle) => handle !== userHandle);
-
+  
       // Update the whitelist in the local storage
       chrome.storage.local.set({ whitelist: updatedWhitelist }, () => {
         // Find the corresponding list item in the DOM
-        const listItem = whitelistElement.querySelector(`li:contains(${userHandle})`);
-
-        if (listItem) {
+        const listItems = whitelistElement.querySelectorAll('li');
+        let listItemToRemove = null;
+  
+        listItems.forEach((listItem) => {
+          if (listItem.textContent === userHandle) {
+            listItemToRemove = listItem;
+          }
+        });
+  
+        if (listItemToRemove) {
           // Remove the list item with a fade-out effect
-          listItem.classList.remove('visible');
+          listItemToRemove.classList.remove('visible');
           setTimeout(() => {
-            listItem.remove();
-            loadWhitelist();
+            listItemToRemove.remove();
+            updatePopupWhitelist(updatedWhitelist); // Update the popup UI with the updated whitelist
           }, 500);
+        } else {
+          // If the list item is not found, still trigger the whitelist update in the popup UI
+          updatePopupWhitelist(updatedWhitelist);
         }
       });
     });
   };
-
+  
+  
+  /**
+   * This function updates the popup UI with the provided whitelist.
+   *
+   * @param {string[]} updatedWhitelist - The updated whitelist.
+   */
+  const updatePopupWhitelist = (updatedWhitelist) => {
+    // Clear the existing whitelist
+    whitelistElement.innerHTML = '';
+  
+    // Render each whitelist item
+    updatedWhitelist.forEach((handle) => {
+      console.log('Adding handle:', handle);
+  
+      // Create a list item element
+      const listItem = document.createElement('li');
+      listItem.textContent = handle;
+      listItem.classList.add('visible');
+  
+      // Create a remove button for each list item
+      const removeButton = document.createElement('button');
+      removeButton.innerText = 'Remove';
+      removeButton.classList.add('glossy-btn');
+      removeButton.dataset.userHandle = handle; // Store the user handle as a data attribute
+  
+      // Append the remove button to the list item
+      listItem.appendChild(removeButton);
+  
+      // Append the list item to the whitelist element
+      whitelistElement.appendChild(listItem);
+    });
+  };
+  
+  // Add event listener for the remove button click event using event delegation
+  whitelistElement.addEventListener('click', (event) => {
+    if (event.target.tagName === 'BUTTON') {
+      const userHandle = event.target.dataset.userHandle;
+      removeUserFromWhitelist(userHandle);
+    }
+  });
+  
+  
   /**
    * Event listener for the add user handle button click event.
    * It adds a new user handle to the whitelist.
