@@ -53,7 +53,7 @@ Here's your feed after the extension, the cats were a worthy sacrifice.....well 
 * I wouldn't be shocked if half the blue verified are bots themselves as most of them add so little to a conversation and just repost to farm views at this point. The only reason I even added the whitelist was for the few who actually do "produce content" or have insightful commentary.
 
 ## todo
-* Add a button to disable functionality if needed, user has to manually disable via extensions, which technically is the point but still...
+* <s>Add a button to disable functionality if needed, user has to manually disable via extensions, which technically is the point but still...</s>
 * Some ads are coming through, add a function to block ads
 * The functionality to block banners and user descriptions is not working properly, but to be fair if you're going to their page you may be interested in seeing those things, considering if this is worth the effort
 * Maybe, maybe, very slight maybe add in functionality to not block content if checkmark user is replying to non-checkmark user
