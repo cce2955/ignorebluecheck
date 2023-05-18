@@ -12,6 +12,55 @@ document.addEventListener('DOMContentLoaded', () => {
   // Get the element that represents the whitelist
   const whitelistElement = document.getElementById('whitelist');
 
+  const switchButton = document.getElementById('switchButton');
+
+  /**
+   * This function updates the switch button state based on the stored isEnabled value.
+   */
+  const updateSwitchButtonState = (isEnabled) => {
+    if (isEnabled) {
+      switchButton.classList.add('on');
+      switchButton.classList.remove('off');
+      switchButton.textContent = 'On';
+    } else {
+      switchButton.classList.add('off');
+      switchButton.classList.remove('on');
+      switchButton.textContent = 'Off';
+    }
+  };
+
+  /**
+   * This function retrieves the isEnabled value from storage and updates the switch button state.
+   */
+  const loadButtonState = () => {
+    // Retrieve the isEnabled value from local storage
+    chrome.storage.local.get('isEnabled', (data) => {
+      const isEnabled = data.isEnabled !== undefined ? data.isEnabled : true;
+      updateSwitchButtonState(isEnabled);
+    });
+  };
+
+  // Add event listener for the switch button click event
+  switchButton.addEventListener('click', () => {
+    switchButton.classList.toggle('on');
+    switchButton.classList.toggle('off');
+
+    if (switchButton.classList.contains('on')) {
+      switchButton.textContent = 'On';
+      // Store the boolean value in storage
+      chrome.storage.local.set({ isEnabled: true });
+      // Perform actions for the "on" state here
+    } else {
+      switchButton.textContent = 'Off';
+      // Store the boolean value in storage
+      chrome.storage.local.set({ isEnabled: false });
+      // Perform actions for the "off" state here
+    }
+  });
+
+  // Load the button state when the DOM is ready
+  loadButtonState();
+
   /**
    * This function loads the whitelist from storage and renders it on the page.
    */

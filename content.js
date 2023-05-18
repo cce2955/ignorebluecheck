@@ -13,20 +13,60 @@ let whitelist = [];
 console.log('whitelist:', whitelist);
 
 /**
- * Fetches the whitelist from storage (if available) and stores it in memory.
+ * The current state of the extension.
+ * Indicates whether the extension is enabled or disabled.
+ */
+let isEnabled = true;
+console.log('isEnabled:', isEnabled);
+
+/**
+ * Fetches the whitelist and state from storage (if available) and stores them in memory.
  * If chrome.storage is not available, an error is logged.
  */
 if (chrome.storage) {
-  chrome.storage.local.get('whitelist', (storageData) => {
+  chrome.storage.local.get(['whitelist', 'isEnabled'], (storageData) => {
     whitelist = storageData.whitelist || [];
+    isEnabled = storageData.isEnabled !== undefined ? storageData.isEnabled : true;
     console.log('Fetched whitelist from storage:', whitelist);
+    console.log('Fetched isEnabled from storage:', isEnabled);
+
+    // Call updateContent function to apply initial changes based on the state
+    updateContent(isEnabled);
   });
 } else {
   console.error('chrome.storage is not available');
 }
 
 /**
- * Listener for incoming messages from the background script or popup.
+ * Listens for messages from the popup.js file.
+ * Handles requests to update the state of the extension.
+ */
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+  if (message.action === 'updateState') {
+    // Update the content based on the updated state
+    updateContent(message.isEnabled);
+  }
+});
+
+/**
+ * Updates the content based on the state of the extension.
+ *
+ * @param {boolean} isEnabled - The current state of the extension (true if enabled, false if disabled).
+ */
+function updateContent(isEnabled) {
+  if (isEnabled) {
+    // Apply changes when the state is true (button is "on")
+    console.log('Button is currently "on". Applying changes...');
+    
+  } else {
+    // Apply changes when the state is false (button is "off")
+    console.log('Button is currently "off". Applying changes...');
+    
+  }
+}
+
+/**
+ * Listens for incoming messages from the background script or popup.
  * Handles requests for data and updates to the whitelist.
  *
  * @param {Object} request - The incoming message object.
@@ -42,7 +82,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   } else if (request.type === 'update_whitelist') {
     // Updates the whitelist with the provided data and sends a success response.
     whitelist = request.whitelist;
+    isEnabled = request.isEnabled;
     console.log('Whitelist updated:', whitelist);
+    console.log('isEnabled updated:', isEnabled);
     sendResponse({ success: true });
   }
 });
@@ -237,7 +279,10 @@ const extractUsernames = () => {
     const primaryColumn = document.querySelector('[data-testid="primaryColumn"]');
     console.log('extractUsernames - primaryColumn:', primaryColumn);
     usernames.forEach((username) => {
-      if (!isUserWhitelisted(username)) {
+      if (!isEnabled) {
+        return; // If blocking is disabled, skip content blocking
+      }
+      if (!isUserWhitelisted(username) || !isEnabled) {
         console.log('Blocking content for non-whitelisted user:', username);
         removeBackgroundImage(tweetElement, username);
         removePhotoChildren(tweetElement, username);
@@ -249,8 +294,9 @@ const extractUsernames = () => {
         removeUserAvatarContainer(primaryColumn);
       }
     });
-  });
-};
+    
+    });
+  }
 
 /**
  * Checks if a username is whitelisted.
@@ -277,6 +323,8 @@ const config = {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'whitelistUpdated') {
     console.log('Whitelist updated');
+    isEnabled = request.isEnabled;
+chrome.storage.local.set({ whitelist, isEnabled });
     replaceContentWithWhitespace();
   }
 });
@@ -290,3 +338,29 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendResponse({ action: 'contentScriptReady' });
   }
 });
+/**
+ * Listens for content loaded messages from the extension.
+ * Sends a response indicating that the content script is ready.
+ */
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'contentLoaded') {
+    console.log('Content loaded');
+    sendResponse({ ready: true });
+  }
+});
+
+/**
+ * Replaces content with whitespace for non-whitelisted users.
+ */
+const replaceContentWithWhitespace = () => {
+  const tweetElements = document.querySelectorAll('[data-testid="tweet"]');
+  console.log('replaceContentWithWhitespace - tweetElements:', tweetElements);
+  tweetElements.forEach((tweetElement) => {
+    const usernameElement = tweetElement.querySelector('div[dir="ltr"] > span');
+    const username = usernameElement.textContent;
+    console.log('replaceContentWithWhitespace - usernameElement:', usernameElement);
+    if (!isUserWhitelisted(username) || !isEnabled) {
+      tweetElement.innerHTML = '<div style="background-color: white; height: 100%;"></div>';
+    }
+  });
+};

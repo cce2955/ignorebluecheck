@@ -1,263 +1,281 @@
 body {
-    width: 350px;
-    padding: 16px;
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(255, 50, 0, 0.5)), url("icons/icon128.png");
-    background-size: cover;
-    background-position: center;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  width: 350px;
+  padding: 16px;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(255, 50, 0, 0.5)), url("icons/icon128.png");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #header {
-    background: linear-gradient(20deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 75%, rgba(255, 255, 255, 1) 100%);
-    opacity: 0.8;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    padding: 15px;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  
-  #header::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 30%, transparent 70%);
-    transform: rotate(45deg);
-    animation: gloss 5s infinite linear;
-  }
-  
- 
+  background: linear-gradient(20deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 75%, rgba(255, 255, 255, 1) 100%);
+  opacity: 0.8;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  padding: 15px;
+  position: relative;
+  overflow: hidden;
+}
 
-  h1 {
-    display: flex;
-    align-items: left;
-    padding-left: 20px;
-    padding-right: 4px; 
-    margin: 0;
-  }
+#header::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 30%, transparent 70%);
+  transform: rotate(45deg);
+  animation: gloss 5s infinite linear;
+}
 
-  h1 img {
-    height: 1em;
-    margin-left: 8px;
-    margin-right: 20px; 
-    transform: scale(3);
-  }
+h1 {
+  display: flex;
+  align-items: left;
+  padding-left: 20px;
+  padding-right: 4px;
+  margin: 0;
+}
 
-  h2 {
-    color: white;
-    border-bottom: 1px solid black;
-    margin-bottom: 16px;
-  }
-  
-  #input-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-    margin-top: 24px;
-  }
-  #whitelist {
-    margin-top: 16px;
-  }
-  .whitelist-manager {
-    border-radius: 10px;
-    padding: 15px;
-  }
-  button {
-    background: linear-gradient(to top right, rgba(30, 144, 255, 1) 0%, rgba(30, 144, 255, 0.8) 60%, rgba(255, 255, 255, 1) 100%);
-    border-radius: 25px;
-    color: #f0f0f0;
-    text-shadow: 1px 1px 2px black;
-    border: 2px solid rgba(30, 144, 255, 0.8);
-    padding: 8px 16px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  
-  button:hover {
-    opacity: 0.8;
-  }
-  li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
+h1 img {
+  height: 1em;
+  margin-left: 8px;
+  margin-right: 20px;
+  transform: scale(3);
+}
+
+h2 {
+  color: white;
+  border-bottom: 1px solid black;
+  margin-bottom: 16px;
+}
+
+#input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  margin-top: 24px;
+}
+
+#whitelist {
+  margin-top: 16px;
+}
+
+.whitelist-manager {
+  border-radius: 10px;
+  padding: 15px;
+}
+
+button {
+  background: linear-gradient(to top right, rgba(30, 144, 255, 1) 0%, rgba(30, 144, 255, 0.8) 60%, rgba(255, 255, 255, 1) 100%);
+  border-radius: 25px;
+  color: #f0f0f0;
+  text-shadow: 1px 1px 2px black;
+  border: 2px solid rgba(30, 144, 255, 0.8);
+  padding: 8px 16px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+button span {
+  position: relative;
+  z-index: 1;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+li.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.popup-box {
+  animation: slideInFromLeft 0.5s ease-out forwards;
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s, transform 0.5s;
   }
-  
-  li.visible {
+  100% {
+    transform: translateX(0);
     opacity: 1;
-    transform: translateY(0);
   }
-  
- 
-  
-  .popup-box {
-    animation: slideInFromLeft 0.5s ease-out forwards;
-  }
-  @keyframes slideInFromRight {
-    0% {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  
-  
-  .popup-box-container {
-    animation: fadeIn 0.5s ease-in forwards;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-  .whitelisted-user {
-    display: inline-block;
-    padding: 10px;
-    background: linear-gradient(to right, black, 2%, transparent);
-    border-radius: 50px;
-    height: 0;
-    overflow: hidden;
-    transition: height 0.5s ease-out;
-  }
-  
-  .whitelisted-user.show {
-    height: auto;
-    transition: height 1s ease-in-out;
-  }
-  
- 
-  .kofi-link {
-    font-size: small;
-    margin-top: 10px;
-    text-align: center; 
-    padding: 10px;
-  }
-  
+}
 
- 
-  .kofi-link {
-    font-size: small;
-    margin-top: 10px;
-    text-align: center; 
-    padding: 10px; 
-  }
+.popup-box-container {
+  animation: fadeIn 0.5s ease-in forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
 
-  
-  .kofi-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-image: linear-gradient(to top right, rgba(255, 87, 34, 1), rgba(255, 87, 34, 0));
-    border-radius: 25px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px black;
-    position: relative;
-    overflow: hidden;
-  }
+.whitelisted-user {
+  display: inline-block;
+  padding: 10px;
+  background: linear-gradient(to right, black, 2%, transparent);
+  border-radius: 50px;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.5s ease-out;
+}
 
-  
-  .kofi-button::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background-image: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 10%, transparent 70%);
-    transform: rotate(45deg);
-    transition: all 0.3s ease;
-  }
+.whitelisted-user.show {
+  height: auto;
+  transition: height 1s ease-in-out;
+}
 
-  
-  .kofi-button:hover::before {
-    top: -20%;
-    left: -20%;
+.kofi-link {
+  font-size: small;
+  margin-top: 10px;
+  text-align: center;
+  padding: 10px;
+}
+
+.switch-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.switch-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-image: linear-gradient(to top right, green, green);
+  border-radius: 25px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px black;
+  position: relative;
+  overflow: hidden;
+}
+
+.kofi-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-image: linear-gradient(to top right, rgba(255, 87, 34, 1), rgba(255, 87, 34, 0));
+  border-radius: 25px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px black;
+  position: relative;
+  overflow: hidden;
+}
+
+.kofi-button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 10%, transparent 70%);
+  transform: rotate(45deg);
+  transition: all 0.3s ease;
+}
+
+.kofi-button:hover::before {
+  top: -20%;
+  left: -20%;
+}
+
+.kofi-link a {
+  background: linear-gradient(to top right, #000, #000 60%, #fff);
+  border-radius: 25px;
+  color: #fff;
+  text-shadow: 2px 2px #000;
+  display: inline-block;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 3px solid #000;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.glossy-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.glossy-btn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 30%, transparent 70%);
+  transform: rotate(45deg);
+  animation: gloss 5s infinite linear;
+}
+
+@keyframes gloss {
+  0% {
+    transform: rotate(45deg) translateX(-50%);
   }
-  .kofi-link a {
-    background: linear-gradient(to top right, #000, #000 60%, #fff);
-    border-radius: 25px;
-    color: #fff;
-    text-shadow: 2px 2px #000;
-    display: inline-block;
-    padding: 8px 16px;
-    text-decoration: none;
-    border: 3px solid #000;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  100% {
+    transform: rotate(45deg) translateX(100%);
   }
-  .glossy-btn {
-    position: relative;
-    overflow: hidden;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
   }
-  
-  .glossy-btn::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 30%, transparent 70%);
-    transform: rotate(45deg);
-    animation: gloss 5s infinite linear;
+  100% {
+    transform: translateX(0);
   }
-  @keyframes gloss {
-    0% {
-      transform: rotate(45deg) translateX(-50%);
-    }
-    100% {
-      transform: rotate(45deg) translateX(100%);
-    }
-  }    
-  @keyframes slideInFromLeft {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(0);
-    }
-  } 
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  @keyframes radialMovement {
-    0% {
-      background-position: 50% 0%;
-    }
-    50% {
-      background-position: 50% 100%;
-    }
-    100% {
-      background-position: 50% 0%;
-    }
+  100% {
+    opacity: 1;
   }
-  @keyframes flicker {
-    0% {
-      background-image: radial-gradient(circle at center, rgba(255, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
-    }
-    50% {
-      background-image: radial-gradient(circle at 20% 20%, rgba(255, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
-    }
-    100% {
-      background-image: radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
-    }
+}
+
+@keyframes radialMovement {
+  0% {
+    background-position: 50% 0%;
   }
-  
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
+}
+
+@keyframes flicker {
+  0% {
+    background-image: radial-gradient(circle at center, rgba(255, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+  }
+  50% {
+    background-image: radial-gradient(circle at 20% 20%, rgba(255, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  }
+  100% {
+    background-image: radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+  }
+}
