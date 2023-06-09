@@ -145,12 +145,11 @@ const removeUserDescription = (container, username) => {
     console.log('Removing user description for', username);
     const userDescriptionDivs = container.querySelectorAll('div[data-testid="UserDescription"]');
     userDescriptionDivs.forEach((descriptionDiv) => {
-      if (descriptionDiv.matches(checkmarkSelector)) {
-        descriptionDiv.replaceChildren();
-      }
+      descriptionDiv.replaceChildren();
     });
   }
 };
+
 /**
  * Removes the user avatar container for a specific username within a container element.
  *
@@ -162,13 +161,10 @@ const removeUserAvatarContainer = (container, username) => {
     console.log('Removing user avatar container for', username);
     const userAvatarContainerDivs = container.querySelectorAll('div[data-testid^="UserAvatar-Container-"]');
     userAvatarContainerDivs.forEach((avatarContainerDiv) => {
-      if (avatarContainerDiv.matches(checkmarkSelector)) {
-        avatarContainerDiv.replaceChildren();
-      }
+      avatarContainerDiv.replaceChildren();
     });
   }
 };
-
 
 /**
  * Removes the tweet text for a specific username within a container element.
@@ -211,11 +207,10 @@ const removeHeaderPhotoChildren = (container) => {
   console.log('Removing header photo children');
   const headerPhotoElements = container.querySelectorAll('a[href*="/header_photo"]');
   headerPhotoElements.forEach((element) => {
-    if (element.matches(checkmarkSelector)) {
-      element.replaceChildren();
-    }
+    element.replaceChildren();
   });
 };
+
 /**
  * Removes the children elements of the photo elements for a specific username within a container element.
  *
