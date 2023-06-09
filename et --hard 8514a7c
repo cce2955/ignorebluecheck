@@ -1,0 +1,58 @@
+[33m3e2cfad[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m Revert "Small bug with user descriptions, banners, and user container avatars, this has been fixed so I can properly filter these out"
+[33m8514a7c[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Small bug with user descriptions, banners, and user container avatars, this has been fixed so I can properly filter these out
+[33m085a317[m Update README.md
+[33m2b2f79b[m Update README.md
+[33mb89ed48[m On/Off Button works, turn off the extension when you're feeling guilty
+[33mfc3b006[m remove button working as intended
+[33m7d1f513[m Full Documentation for the .js files, remove button still broken, may do that at home
+[33mce0e999[m First part of documentation, the remove button is now broken, that will be fixed soon
+[33m8a41e1f[m Whitelist was broken for an hour or so, it's now restored, now back to my original bug squashing
+[33m4390c81[m Had a double observer, this has been removed, this is clean aside from the uncaught in promise error which is being investigated
+[33m9da7951[m Description, header, and banner is now blocked, squashing some bugs
+[33m1334c08[m Rename README.mdl to README.md
+[33m5de72a7[m Update and rename README.md to README.mdl
+[33m30d6e95[m Update README.md
+[33mfe7c218[m Update README.md
+[33md5698b0[m small fixes
+[33mcc81bd3[m Update README.md
+[33m1798056[m Update README.md
+[33m33d2594[m Update README.md
+[33m0cb205e[m Delete icon-add-remove.svg
+[33m460f4c6[m More CSS
+[33me093c95[m removed kofi.js
+[33mb59f158[m Organizing files
+[33ma3bc456[m Update README.md
+[33mb83650d[m Update README.md
+[33m00ee662[m Update README.md
+[33m0604697[m Major CSS update
+[33m1f7b006[m css
+[33mee6c587[m Update README.md
+[33mbcaf5fa[m Update README.md
+[33mac575e6[m Update README.md
+[33mf69bb9e[m Update README.md
+[33mfd5d5e2[m Added icons
+[33m04a2912[m Update README.md
+[33m1d4d749[m Update README.md
+[33mc66bb39[m Accidently made it so everyone was blocked except whoever was whitelisted, this has been fixed, not blue checks are gone unless whitelisted
+[33m34d9275[m Finished, throws one error, but I don't really care, this is it
+[33ma6f2765[m privacy concern
+[33m3409310[m Merge branch 'main' of https://github.com/cce2955/ignorebluecheck
+[33m3ae09fb[m Basic whitelist working
+[33m8f4d14b[m Update README.md
+[33m381d13c[m Create README.md
+[33m3d0dec7[m More stable version, attempting to figure out a whitelist system
+[33mbcf09e9[m Update readme.md
+[33m26a4d04[m Update readme.md
+[33md937137[m Update readme.md
+[33m5550206[m Update readme.md
+[33mafecc74[m Merge branch 'main' of https://github.com/cce2955/ignorebluecheck because I said so
+[33m93df261[m Changed a few bugs
+[33m69a4074[m Update readme.md
+[33m89b77c8[m Update readme.md
+[33mca98710[m Update readme.md
+[33m7e9bd58[m Delete after extension.png
+[33md282c03[m Delete before extension.png
+[33me1eb624[m Removed images
+[33m386f561[m Update readme.md
+[33maeda215[m Update readme.md
+[33m5dac397[m Pushed files
