@@ -46,7 +46,7 @@ Here's your feed after the extension, the cats were a worthy sacrifice.....well 
 * In the top right, toggle "developer mode"
 * Click "load unpacked"
 * After unzipping this archive, select the extracted folder
-* The extension should be activated as soon as it's installed, if not you can manually activate it under "manage extensions". If you want to see the blocked users, simply go back to "Manage extensions" and turn it off, the next time you refresh a page, all the blocked content should be unblocked.
+* The extension should be activated as soon as it's installed, if not you can manually activate it under "manage extensions". If you want to see the blocked users, there is a button on the extension itself that lets you see everyone sitewide
 
 ## What's blocked
 * If demand is high I'll change it, but right now you can only see "who" you are ignoring, but all text, videos, and pictures from a user with a blue checkmark should be unable to load. At the moment if someone posts an external link (youtube video, news artcile, etc.) that is not blocked but I think that's fair enough since usually they link other people's videos.
