@@ -4,6 +4,8 @@
 - [Why?](#why)
 - [todo](#todo)
 
+# Update July 2023
+When I originally made this, Twitter (or as it will soon be known for reasons nobody can figure out X) was still fairly open to everyone, but now that you have to be logged in just to browse the stupid thing, this extension is a little redundant, it does work when you're logged in, and it still blocks them, but honestly this was a fun excercise in futility as proper branding and technology can be wiped out by someone who failed at marketing and second order. With that being said, I appreciate anyone who did use it (or still is)
 # Introduction
 
 Hi! This is a google extension that blocks all blue checks from Twitter. It's still a work in progress so it doesn't block everything but it should block out 99% of things. You can manually block on your account or use one of the already available blue blockers, but this works even when you're not logged in and doesn't use any data from both google or twitter. It may use google data when I upload the extension to the extension marketplace but that's in the future
